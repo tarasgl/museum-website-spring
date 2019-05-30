@@ -7,10 +7,10 @@
                 <a class='nav-link' href='/exhibits'>Exhibits</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link " href="/excursions">Excursions</a>
+                <a class="nav-link " href="/excursion">Excursions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/employees">Employees</a>
+                <a class="nav-link" href="/employee">Employees</a>
             </li>
         </ul>
     </nav>

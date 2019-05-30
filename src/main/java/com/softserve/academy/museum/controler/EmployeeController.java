@@ -17,7 +17,7 @@ public class EmployeeController {
     @GetMapping("/employee")
     public String employeeForm(Locale locale, Model model) {
         model.addAttribute("employees", employeeService.getAll());
-        return "employees";
+        return "museum-website.employees";
     }
 
 

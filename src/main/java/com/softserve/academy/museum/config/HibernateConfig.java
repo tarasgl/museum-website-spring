@@ -20,7 +20,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
-        factoryBean.setAnnotatedClasses(User.class, Author.class, Exhibit.class, Hall.class, Employee.class, Position.class);
+        factoryBean.setAnnotatedClasses(User.class, Author.class, Exhibit.class, Hall.class, Employee.class, Position.class, Excursion.class);
         return factoryBean;
     }
 

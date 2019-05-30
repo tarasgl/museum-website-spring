@@ -1,0 +1,115 @@
+package com.softserve.academy.museum.model;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * Pojo class for 'author' entity from database.
+ *
+ * @author Andrii Vashchenok
+ */
+@Entity
+@Table(name="author")
+public class Author {
+
+    @Id
+    @GeneratedValue
+    @Column(name="id")
+    private int id;
+
+    @Column(name="firstname")
+    private String firstname;
+
+    @Column(name="lastname")
+    private String lastname;
+
+
+
+    //@OneToMany(mappedBy = "exhibit", fetch = FetchType.LAZY)
+    @Transient
+    private List<Exhibit> exhibits;
+
+
+    /**
+     * Gets id of an author.
+     *
+     * @return Integer id.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets id of an author.
+     *
+     * @param id Integer id.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets first name of an author.
+     *
+     * @return First name of an author.
+     */
+    public String getFirstname() {
+        return firstname;
+    }
+
+    /**
+     * Sets first name of an author.
+     *
+     * @param firstname First name of an author.
+     */
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    /**
+     * Gets last name of an author.
+     *
+     * @return Last name of an author.
+     */
+    public String getLastname() {
+        return lastname;
+    }
+
+    /**
+     * Sets last name of an author.
+     *
+     * @param lastname Last name of an author.
+     */
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname, lastname);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (object == this) {
+            return true;
+        } else if (!(object instanceof Author)) {
+            return false;
+        }
+
+        Author author = (Author) object;
+
+        return (author.firstname.equals(firstname))
+                && (author.lastname.equals(lastname));
+    }
+
+    public List<Exhibit> getExhibits() {
+        return exhibits;
+    }
+
+    public void setExhibits(List<Exhibit> exhibits) {
+        this.exhibits = exhibits;
+    }
+}

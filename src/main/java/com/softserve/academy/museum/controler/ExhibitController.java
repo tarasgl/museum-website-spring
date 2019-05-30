@@ -14,6 +14,6 @@ public class ExhibitController {
     @GetMapping("/exhibits")
     public String exhibits(Model model){
         model.addAttribute("exhibits", exhibitService.getAll());
-        return "exhibits";
+        return "museum-website.exhibits";
     }
 }

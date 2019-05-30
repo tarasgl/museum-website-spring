@@ -7,7 +7,7 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/styles/stylesheet.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/styles/stylesheet.css">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -31,4 +31,4 @@
 
 </body>
 
-<script src="${pageContext.request.contextPath}/static/scripts/exhibits.js"></script>
+<script src="${pageContext.request.contextPath}/resources/static/scripts/exhibits.js"></script>

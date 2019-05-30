@@ -3,7 +3,7 @@
 <c:forEach items="${exhibits}" var="exhibit">
     <div class = "col-md-3" >
         <div class="card">
-            <img class="card-img-top"  src="${pageContext.request.contextPath}/static/img/<c:out value="${exhibit.image}"/>" alt="Card image">
+            <img class="card-img-top"  src="${pageContext.request.contextPath}/resources/static/img/<c:out value="${exhibit.image}"/>" alt="Card image">
             <div class="card-body">
                 <h4 class="card-title"><c:out value="${exhibit.name}"/></h4>
                 <p class="card-text">

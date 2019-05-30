@@ -8,6 +8,7 @@ import java.util.Objects;
  *
  * @author Andrii Vashchenok
  */
+
 @Entity
 @Table(name = "employee")
 public class Employee {

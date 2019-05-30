@@ -1,6 +1,7 @@
 package com.softserve.academy.museum.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,13 @@ public class Author {
 
     @Column(name="lastname")
     private String lastname;
+
+
+
+    //@OneToMany(mappedBy = "exhibit", fetch = FetchType.LAZY)
+    @Transient
+    private List<Exhibit> exhibits;
+
 
     /**
      * Gets id of an author.
@@ -97,4 +105,11 @@ public class Author {
                 && (author.lastname.equals(lastname));
     }
 
+    public List<Exhibit> getExhibits() {
+        return exhibits;
+    }
+
+    public void setExhibits(List<Exhibit> exhibits) {
+        this.exhibits = exhibits;
+    }
 }

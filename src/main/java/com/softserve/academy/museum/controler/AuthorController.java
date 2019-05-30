@@ -15,7 +15,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @GetMapping("/authors")
-    public String userForm( Model model) {
+    public String authors( Model model) {
         model.addAttribute("authors", authorService.getAll());
         return "authors";
     }

@@ -1,6 +1,6 @@
 package com.softserve.academy.museum.config;
 
-import com.softserve.academy.museum.model.Author;
+import com.softserve.academy.museum.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.softserve.academy.museum.model.User;
 
 @Configuration
 @EnableTransactionManagement
@@ -24,7 +22,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
-        factoryBean.setAnnotatedClasses(User.class, Author.class);
+        factoryBean.setAnnotatedClasses(User.class, Author.class, Exhibit.class, Hall.class, Employee.class);
         return factoryBean;
     }
 

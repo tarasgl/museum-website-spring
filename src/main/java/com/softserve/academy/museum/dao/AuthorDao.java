@@ -7,5 +7,7 @@ import java.util.List;
 
 @Repository
 public interface AuthorDao {
+
     List<Author> getAll();
+
 }

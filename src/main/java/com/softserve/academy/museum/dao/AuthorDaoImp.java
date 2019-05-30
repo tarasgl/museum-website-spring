@@ -1,7 +1,6 @@
 package com.softserve.academy.museum.dao;
 
 import com.softserve.academy.museum.model.Author;
-import com.softserve.academy.museum.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +17,6 @@ public class AuthorDaoImp implements AuthorDao {
     @Override
     @Transactional
     public List<Author> getAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<Author> query = sessionFactory.getCurrentSession().createQuery("from Author");
         return query.getResultList();
     }

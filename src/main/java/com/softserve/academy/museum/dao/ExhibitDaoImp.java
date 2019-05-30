@@ -22,4 +22,5 @@ public class ExhibitDaoImp implements ExhibitDao {
         TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit");
         return query.getResultList();
     }
+
 }

@@ -105,6 +105,12 @@
             <artifactId>tiles-extras</artifactId>
             <version>3.0.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
  
     <build>

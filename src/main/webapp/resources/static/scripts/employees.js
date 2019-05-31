@@ -3,7 +3,7 @@ function posChanged() {
     var pos = $("#posSelect option:selected").val();
 
     $.ajax({
-        url:'employees/filterByPosition',
+        url:'employee/position',
         type:'GET',
         data:{
             position:pos
@@ -26,11 +26,11 @@ function dateChanged() {
 
     if (startDate && endDate) {
         $.ajax({
-            url: 'employees/filterByDate',
+            url: 'employee/free',
             type: 'GET',
             data: {
-                startDate: startDate,
-                endDate: endDate
+                from: startDate,
+                to: endDate
             },
             success: function (response) {
                 $('#main-div').html(response);
@@ -48,10 +48,10 @@ function clearDates() {
     $("#dateStartSelect").val('');
     $("#dateFinishSelect").val('');
     $.ajax({
-        url: 'employees/filterByPosition',
+        url: 'employee/position',
         type: 'GET',
         data: {
-            position: ""
+            position: "all"
         },
         success: function (data) {
             $('#main-div').html(data);
@@ -60,14 +60,21 @@ function clearDates() {
 };
 
 function getWorkTime(elementId) {
+
     var id = elementId.substring(21);
+
+    var startDateOrigin = $("#dateStartSelect-" + id).val();
+    var endDateOrigin = $("#dateFinishSelect-" + id).val();
+    var startDate = startDateOrigin.replace('T', ' ');
+    var endDate = endDateOrigin.replace('T', ' ');
+
     $.ajax({
-        url: 'employees/getWorkTime',
+        url: 'employee/getWorkTime',
         type: 'GET',
         data: {
             id: id,
-            startDate: $("#dateStartSelect-"+id).val().replace('T', ' '),
-            endDate: $("#dateFinishSelect-"+id).val().replace('T', ' ')
+            from: startDate,
+            to: endDate
         },
         success: function (data) {
             $("#workTime-" + id).text("Work time: " + data);
@@ -79,7 +86,7 @@ function getExcursionsCount(elementId) {
     var id = elementId.substring(22);
     console.log(id);
     $.ajax({
-        url: 'employees/getExcursionsCount',
+        url: 'employee/getExcursionsCount',
         type: 'GET',
         data: {
             id: id

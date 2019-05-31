@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
@@ -25,6 +29,55 @@ public class EmployeeDaoImpl implements EmployeeDao {
         TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery("from Employee");
         ArrayList<Employee> list = (ArrayList<Employee>) query.getResultList();
         return list;
+
+    }
+
+    @Override
+    @Transactional
+    public List<Employee> getByPosition(Position position) {
+
+        String hql = "from Employee where position.name = :pos";
+
+        TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery(hql);
+
+        query.setParameter("pos", position.getName());
+
+        return query.getResultList();
+
+    }
+
+    @Override
+    @Transactional
+    public List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) {
+
+        String hql = "select distinct e.employee from Excursion e "
+                + "where e.start not between :fromDate and :toDate";
+
+
+        /*+ "or ( DATE_ADD(Excursion.start, interval Excursion.duration minute) "
+                + "between :fromDate and :toDate))"*/
+
+        TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery(hql);
+
+        query.setParameter("fromDate", from);
+        query.setParameter("toDate", to);
+
+        return query.getResultList();
+
+    }
+
+    @Override
+    @Transactional
+    public long getWorkTime(int id, LocalDateTime from, LocalDateTime to) {
+
+        String hql = "select sum(e.duration) from Excursion e where e.employee.id = :id and e.start between :fromDate and :toDate";
+
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setParameter("id", id);
+        query.setParameter("fromDate", from);
+        query.setParameter("toDate", to);
+
+        return (Long) query.getSingleResult();
 
     }
 

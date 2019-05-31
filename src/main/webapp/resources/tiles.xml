@@ -15,9 +15,9 @@
 
     <definition name="museum-website.employees" extends="museum-website.base">
         <put-attribute name="title" value="Employees"/>
-        <!--
+
         <put-attribute name="filterBar" value="/WEB-INF/views/employeesFilterBar.jsp"/>
-        -->
+
         <put-attribute name="content" value="/WEB-INF/views/employees.jsp"/>
     </definition>
 

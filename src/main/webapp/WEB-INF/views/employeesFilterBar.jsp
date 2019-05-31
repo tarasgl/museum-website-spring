@@ -2,8 +2,8 @@
     <div class="col-md-1"></div>
     <select id="posSelect" onchange="posChanged()">
         <option value="">All</option>
-        <option value="manager">Manager</option>
-        <option value="guide">Guide</option>
+        <option value="Manager">Manager</option>
+        <option value="Guide">Guide</option>
     </select>
     <label style="margin-left: 30px">From</label>
     <input id="dateStartSelect" type="datetime-local" name="dateSelect" style="margin-left: 20px"

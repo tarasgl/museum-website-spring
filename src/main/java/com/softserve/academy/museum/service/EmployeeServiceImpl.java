@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -49,18 +50,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public ArrayList<Employee> getByPosition(Position position) {
-        return null;
+    public List<Employee> getByPosition(Position position) {
+        return employeeDao.getByPosition(position);
     }
 
     @Override
-    public ArrayList<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) {
-        return null;
+    public List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) {
+        return employeeDao.getFreeGuides(from, to);
     }
 
     @Override
-    public int getWorkTime(int id, LocalDateTime from, LocalDateTime to) {
-        return 0;
+    public long getWorkTime(int id, LocalDateTime from, LocalDateTime to) {
+        return employeeDao.getWorkTime(id, from, to);
     }
 
     @Override

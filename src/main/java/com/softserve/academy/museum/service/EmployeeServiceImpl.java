@@ -65,7 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public int getExcursionCount(int id) {
-        return 0;
+    public long getExcursionCount(int id) {
+        return employeeDao.getExcursionsCount(id);
     }
 }

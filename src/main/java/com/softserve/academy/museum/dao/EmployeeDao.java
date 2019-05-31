@@ -17,4 +17,6 @@ public interface EmployeeDao {
 
     long getWorkTime(int id, LocalDateTime from, LocalDateTime to);
 
+    long getExcursionsCount(int id);
+
 }

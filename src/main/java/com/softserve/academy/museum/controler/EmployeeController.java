@@ -75,4 +75,14 @@ public class EmployeeController {
 
     }
 
+    @GetMapping("/employee/getExcursionsCount")
+    @ResponseBody
+    public String getExcursionsCount(@RequestParam(name = "id") Integer id,
+                                     Model model
+                                            ) {
+
+        return Long.toString(employeeService.getExcursionCount(id));
+
+    }
+
 }

@@ -81,4 +81,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     }
 
+    @Override
+    @Transactional
+    public long getExcursionsCount(int id) {
+
+        String hql = "select count(*) from Excursion e where e.employee.id = :id and e.start < current_time";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setParameter("id", id);
+
+        return (Long) query.getSingleResult();
+
+    }
+
 }

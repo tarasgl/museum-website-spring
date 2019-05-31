@@ -27,6 +27,6 @@ public interface EmployeeService {
 
     long getWorkTime(int id, LocalDateTime from, LocalDateTime to);
 
-    int getExcursionCount(int id);
+    long getExcursionCount(int id);
 
 }

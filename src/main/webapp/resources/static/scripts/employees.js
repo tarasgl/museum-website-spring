@@ -84,7 +84,6 @@ function getWorkTime(elementId) {
 
 function getExcursionsCount(elementId) {
     var id = elementId.substring(22);
-    console.log(id);
     $.ajax({
         url: 'employee/getExcursionsCount',
         type: 'GET',

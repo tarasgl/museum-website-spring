@@ -5,6 +5,7 @@ import com.softserve.academy.museum.model.Position;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -20,12 +21,12 @@ public interface EmployeeService {
 
     void delete(Employee employee);
 
-    ArrayList<Employee> getByPosition(Position position);
+    List<Employee> getByPosition(Position position);
 
-    ArrayList<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to);
+    List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to);
 
-    int getWorkTime(int id, LocalDateTime from, LocalDateTime to);
+    long getWorkTime(int id, LocalDateTime from, LocalDateTime to);
 
-    int getExcursionCount(int id);
+    long getExcursionCount(int id);
 
 }

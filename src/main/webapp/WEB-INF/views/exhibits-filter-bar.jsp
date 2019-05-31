@@ -28,6 +28,8 @@
     <div class="col-md-3 author-filter filter-el">
         <button id="author-filter-button"> Do filter</button>
     </div>
+
+    <%--
     <div class="col-md-3 hall-filter filter-el">
         <select id="hallId" name="hallId" >
             <option value="" selected="selected">All Halls</option>
@@ -85,4 +87,6 @@
     <div class="col-md-3 employee-filter filter-el">
         <button id="employee-filter-button"> Do filter</button>
     </div>
+
+    --%>
 </div>

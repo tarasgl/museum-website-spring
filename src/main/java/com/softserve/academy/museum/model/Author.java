@@ -25,12 +25,6 @@ public class Author {
     private String lastname;
 
 
-
-    //@OneToMany(mappedBy = "exhibit", fetch = FetchType.LAZY)
-    @Transient
-    private List<Exhibit> exhibits;
-
-
     /**
      * Gets id of an author.
      *
@@ -105,11 +99,4 @@ public class Author {
                 && (author.lastname.equals(lastname));
     }
 
-    public List<Exhibit> getExhibits() {
-        return exhibits;
-    }
-
-    public void setExhibits(List<Exhibit> exhibits) {
-        this.exhibits = exhibits;
-    }
 }

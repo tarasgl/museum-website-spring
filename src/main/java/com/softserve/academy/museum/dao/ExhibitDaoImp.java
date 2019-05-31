@@ -17,9 +17,20 @@ public class ExhibitDaoImp implements ExhibitDao {
 
     @Override
     @Transactional
+    @SuppressWarnings("unchecked")
     public List<Exhibit> getAll() {
-        @SuppressWarnings("unchecked")
+
         TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit");
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Exhibit> getByAuthorId(int authorId){
+
+        TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit where author.id = :authorId");
+        query.setParameter("authorId", authorId);
         return query.getResultList();
     }
 

@@ -9,4 +9,6 @@ import java.util.List;
 public interface ExhibitService {
     List<Exhibit> getAll();
 
+    List<Exhibit> getByAuthorId(int authorId);
+
 }

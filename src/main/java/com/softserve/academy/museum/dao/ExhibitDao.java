@@ -8,4 +8,6 @@ public interface ExhibitDao {
 
     List<Exhibit> getAll();
 
+    List<Exhibit> getByAuthorId(int authorId);
+
 }

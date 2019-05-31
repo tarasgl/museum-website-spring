@@ -34,4 +34,50 @@ public class ExhibitDaoImp implements ExhibitDao {
         return query.getResultList();
     }
 
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Exhibit> getByHallId(int hallId){
+
+        TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit where hall.id = :hallId");
+        query.setParameter("hallId", hallId);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Exhibit> getByMaterial(String material){
+
+        TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit where material = :material");
+        query.setParameter("material", material);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Exhibit> getByTechnique(String technique){
+
+        TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit where technique = :technique");
+        query.setParameter("technique", technique);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<String> getAllTechniques(){
+        TypedQuery<String> query = sessionFactory.getCurrentSession().createQuery("select distinct technique from Exhibit");
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<String> getAllMaterials(){
+        TypedQuery<String> query = sessionFactory.getCurrentSession().createQuery("select distinct material from Exhibit");
+        return query.getResultList();
+    }
 }

@@ -11,4 +11,10 @@ public interface ExhibitService {
 
     List<Exhibit> getByAuthorId(int authorId);
 
+    List<Exhibit> getByHallId(int hallId);
+
+    List<Exhibit> getByMaterial(String material);
+
+    List<Exhibit> getByTechnique(String material);
+
 }

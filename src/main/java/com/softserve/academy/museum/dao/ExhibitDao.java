@@ -10,4 +10,14 @@ public interface ExhibitDao {
 
     List<Exhibit> getByAuthorId(int authorId);
 
+    List<Exhibit> getByHallId(int authorId);
+
+    List<Exhibit> getByMaterial(String material);
+
+    List<Exhibit> getByTechnique(String material);
+
+    List<String> getAllTechniques();
+
+    List<String> getAllMaterials();
+
 }

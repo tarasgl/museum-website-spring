@@ -2,7 +2,6 @@ package com.softserve.academy.museum.dao;
 
 import com.softserve.academy.museum.model.Employee;
 import com.softserve.academy.museum.model.Position;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +75,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
         query.setParameter("fromDate", from);
         query.setParameter("toDate", to);
 
-        return (Long) query.getSingleResult();
+        Object result = query.getSingleResult();
+
+        if (result != null) {
+            return (Long) query.getSingleResult();
+        } else {
+            return 0;
+        }
 
     }
 

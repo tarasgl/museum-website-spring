@@ -2,7 +2,7 @@
 
         <div class="col-md-1"></div>
         <div class="col-md-11">
-            <label>Excursions count: <c:out value="${excursionsCount}"/></label>
+            <label>Excursions count: <c:out value="${excursions.size()}"/></label>
         </div>
         <c:forEach items="${excursions}" var="excursion">
             <div class="col-md-1"></div>

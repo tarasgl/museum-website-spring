@@ -37,7 +37,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
         String hql = "from Employee where position.name = :pos";
 
         TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery(hql);
-
         query.setParameter("pos", position.getName());
 
         return query.getResultList();
@@ -50,10 +49,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         String hql = "select distinct e.employee from Excursion e "
                 + "where e.start not between :fromDate and :toDate";
-
-
-        /*+ "or ( DATE_ADD(Excursion.start, interval Excursion.duration minute) "
-                + "between :fromDate and :toDate))"*/
 
         TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -93,7 +88,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setParameter("id", id);
 
-        return (Long) query.getSingleResult();
+        Object result = query.getSingleResult();
+
+        if (result != null) {
+            return (Long) query.getSingleResult();
+        } else {
+            return 0;
+        }
 
     }
 

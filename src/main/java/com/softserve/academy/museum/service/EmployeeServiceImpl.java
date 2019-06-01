@@ -20,34 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     EmployeeDao employeeDao;
 
     @Override
-    public Employee getById(int id) {
-        return null;
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public ArrayList<Employee> getAll() {
         return employeeDao.getAll();
-    }
-
-    @Override
-    public ArrayList<Employee> getAllManagersOnHall() {
-        return null;
-    }
-
-    @Override
-    public void save(Employee employee) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void update(Employee employee) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void delete(Employee employee) {
-        throw new NotImplementedException();
     }
 
     @Override

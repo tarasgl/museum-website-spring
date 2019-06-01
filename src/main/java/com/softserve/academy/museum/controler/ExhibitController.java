@@ -1,6 +1,7 @@
 package com.softserve.academy.museum.controler;
 
 import com.softserve.academy.museum.model.Hall;
+import com.softserve.academy.museum.model.Position;
 import com.softserve.academy.museum.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class ExhibitController {
     @Autowired
     private MaterialService materialService;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     @GetMapping("/exhibits")
     public String exhibits(Model model){
         model.addAttribute("exhibits", exhibitService.getAll());
@@ -32,6 +36,9 @@ public class ExhibitController {
         model.addAttribute("halls", hallService.getAll());
         model.addAttribute("techniques", techniqueService.getAll());
         model.addAttribute("materials", materialService.gatAll());
+        Position managerPosition = new Position();
+        managerPosition.setName("manager");
+        model.addAttribute("employees", employeeService.getByPosition(managerPosition));
         return "museum-website.exhibits";
     }
 
@@ -71,6 +78,16 @@ public class ExhibitController {
             model.addAttribute("exhibits", exhibitService.getAll());
         } else {
             model.addAttribute("exhibits", exhibitService.getByTechnique(technique));
+        }
+        return "exhibits";
+    }
+
+    @GetMapping("/exhibits/filterByEmployee")
+    public String exhibitsByEmployeeId(@RequestParam(name="employeeId") Integer employeeId, Model model){
+        if (employeeId == null){
+            model.addAttribute("exhibits", exhibitService.getAll());
+        } else {
+            model.addAttribute("exhibits", exhibitService.getByEmployeeId(employeeId));
         }
         return "exhibits";
     }

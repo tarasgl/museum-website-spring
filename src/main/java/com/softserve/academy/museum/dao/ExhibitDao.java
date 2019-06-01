@@ -16,6 +16,8 @@ public interface ExhibitDao {
 
     List<Exhibit> getByTechnique(String material);
 
+    List<Exhibit> getByEmployeeId(int employeeId);
+
     List<String> getAllTechniques();
 
     List<String> getAllMaterials();

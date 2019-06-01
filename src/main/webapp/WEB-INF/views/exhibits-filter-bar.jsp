@@ -74,7 +74,7 @@
         <button id="technique-filter-button"> Do filter</button>
     </div>
 
-    <%--
+
     <div class="col-md-3 employee-filter filter-el">
         <select id="employeeId" name="employeeId">
             <option value="" selected="selected">All employees</option>
@@ -90,5 +90,5 @@
         <button id="employee-filter-button"> Do filter</button>
     </div>
 
-    --%>
+
 </div>

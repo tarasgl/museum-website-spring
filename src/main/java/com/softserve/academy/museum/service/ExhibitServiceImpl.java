@@ -37,4 +37,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     public List<Exhibit> getByTechnique(String technique){
         return exhibitDao.getByTechnique(technique);
     }
+
+    @Override
+    public List<Exhibit> getByEmployeeId(int employeeId) {
+        return exhibitDao.getByEmployeeId(employeeId);
+    }
+
+
 }

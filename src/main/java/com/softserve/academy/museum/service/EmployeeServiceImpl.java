@@ -7,6 +7,7 @@ import com.softserve.academy.museum.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,17 +37,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void save(Employee employee) {
-
+        throw new NotImplementedException();
     }
 
     @Override
     public void update(Employee employee) {
-
+        throw new NotImplementedException();
     }
 
     @Override
     public void delete(Employee employee) {
-
+        throw new NotImplementedException();
     }
 
     @Override

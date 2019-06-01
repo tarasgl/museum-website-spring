@@ -68,6 +68,15 @@ public class ExhibitDaoImp implements ExhibitDao {
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
+    public List<Exhibit> getByEmployeeId(int employeeId) {
+        TypedQuery<Exhibit> query = sessionFactory.getCurrentSession().createQuery("from Exhibit where hall.employee.id = :employeeId");
+        query.setParameter("employeeId", employeeId);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
     public List<String> getAllTechniques(){
         TypedQuery<String> query = sessionFactory.getCurrentSession().createQuery("select distinct technique from Exhibit");
         return query.getResultList();

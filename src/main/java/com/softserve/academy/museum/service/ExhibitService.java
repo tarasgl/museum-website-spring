@@ -17,4 +17,6 @@ public interface ExhibitService {
 
     List<Exhibit> getByTechnique(String material);
 
+    List<Exhibit> getByEmployeeId(int employeeId);
+
 }

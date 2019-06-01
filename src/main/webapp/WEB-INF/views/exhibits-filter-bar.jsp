@@ -28,6 +28,8 @@
     <div class="col-md-3 author-filter filter-el">
         <button id="author-filter-button"> Do filter</button>
     </div>
+
+
     <div class="col-md-3 hall-filter filter-el">
         <select id="hallId" name="hallId" >
             <option value="" selected="selected">All Halls</option>
@@ -57,6 +59,7 @@
         <button id="material-filter-button"> Do filter</button>
     </div>
 
+
     <div class="col-md-3 technique-filter filter-el">
         <select id="technique" name="technique">
             <option value="" selected="selected">All techniques</option>
@@ -70,6 +73,7 @@
     <div class="col-md-3 technique-filter filter-el">
         <button id="technique-filter-button"> Do filter</button>
     </div>
+
 
     <div class="col-md-3 employee-filter filter-el">
         <select id="employeeId" name="employeeId">
@@ -85,4 +89,6 @@
     <div class="col-md-3 employee-filter filter-el">
         <button id="employee-filter-button"> Do filter</button>
     </div>
+
+
 </div>

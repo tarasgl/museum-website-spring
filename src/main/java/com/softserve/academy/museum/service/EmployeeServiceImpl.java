@@ -7,6 +7,7 @@ import com.softserve.academy.museum.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,34 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     EmployeeDao employeeDao;
 
     @Override
-    public Employee getById(int id) {
-        return null;
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public ArrayList<Employee> getAll() {
         return employeeDao.getAll();
-    }
-
-    @Override
-    public ArrayList<Employee> getAllManagersOnHall() {
-        return null;
-    }
-
-    @Override
-    public void save(Employee employee) {
-
-    }
-
-    @Override
-    public void update(Employee employee) {
-
-    }
-
-    @Override
-    public void delete(Employee employee) {
-
     }
 
     @Override

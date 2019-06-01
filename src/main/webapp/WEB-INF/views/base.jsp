@@ -31,4 +31,6 @@
 
 </body>
 
-<script src="${pageContext.request.contextPath}/resources/static/scripts/exhibits.js"></script>
+<script src='${pageContext.request.contextPath}<tiles:getAsString name="script"/>'></script>
+
+</html>

@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class AuthorDaoImp implements AuthorDao {
+public class AuthorDaoImpl implements AuthorDao {
     @Autowired
     private SessionFactory sessionFactory;
 

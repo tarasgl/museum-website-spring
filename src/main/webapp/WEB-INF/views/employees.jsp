@@ -1,5 +1,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+<c:if test="${not empty employees}">
+
         <c:forEach items="${employees}" var="employee">
             <div class="col-md-1"></div>
             <div class = "col-md-10 row excursion-info">
@@ -28,4 +30,10 @@
             </div>
             <div class="col-md-1"></div>
         </c:forEach>
+
+    </c:if>
+<c:if test="${empty employees}">
+        <div class="col-md-1"></div>
+        <h2>We're sorry, but no employees found:(</h2>
+</c:if>
 

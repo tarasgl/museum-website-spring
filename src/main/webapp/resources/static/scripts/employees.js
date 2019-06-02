@@ -21,25 +21,45 @@ function dateChanged() {
 
     var startDateOrigin = $("#dateStartSelect").val();
     var endDateOrigin = $("#dateFinishSelect").val();
-    var startDate = startDateOrigin.replace('T', ' ');
-    var endDate = endDateOrigin.replace('T', ' ');
 
-    if (startDate && endDate) {
-        $.ajax({
-            url: 'employee/free',
-            type: 'GET',
-            data: {
-                from: startDate,
-                to: endDate
-            },
-            success: function (response) {
-                $('#main-div').html(response);
-            },
-            complete: function (data) {
-                $("#dateStartSelect").val(startDateOrigin);
-                $("#dateFinishSelect").val(endDateOrigin);
-            }
-        })
+    if (startDateOrigin != null && endDateOrigin != null) {
+
+        var date1 = new Date(startDateOrigin);
+        var date2 = new Date(endDateOrigin);
+
+        if (date2 > date1) {
+
+            var startDate = startDateOrigin.replace('T', ' ');
+            var endDate = endDateOrigin.replace('T', ' ');
+
+            $.ajax({
+                url: 'employee/free',
+                type: 'GET',
+                data: {
+                    from: startDate,
+                    to: endDate
+                },
+                success: function (response) {
+                    $('#main-div').html(response);
+                },
+                complete: function (data) {
+                    $("#dateStartSelect").val(startDateOrigin);
+                    $("#dateFinishSelect").val(endDateOrigin);
+                }
+            })
+        } else {
+
+            window.alert("All date boxes must be filled.\nSecond date box must contain bigger date value.");
+            $("#dateStartSelect").val("");
+            $("#dateFinishSelect").val("");
+
+        }
+    } else {
+
+        window.alert("Incorrect date input.\nRequired: [mm/dd/yyyy hh:mm p]");
+        $("#dateStartSelect").val("");
+        $("#dateFinishSelect").val("");
+
     }
 
 };
@@ -65,21 +85,43 @@ function getWorkTime(elementId) {
 
     var startDateOrigin = $("#dateStartSelect-" + id).val();
     var endDateOrigin = $("#dateFinishSelect-" + id).val();
-    var startDate = startDateOrigin.replace('T', ' ');
-    var endDate = endDateOrigin.replace('T', ' ');
 
-    $.ajax({
-        url: 'employee/getWorkTime',
-        type: 'GET',
-        data: {
-            id: id,
-            from: startDate,
-            to: endDate
-        },
-        success: function (data) {
-            $("#workTime-" + id).text("Work time: " + data);
+    if (startDateOrigin != null && endDateOrigin != null) {
+
+        var date1 = new Date(startDateOrigin);
+        var date2 = new Date(endDateOrigin);
+
+        if (date1 < date2) {
+
+            var startDate = startDateOrigin.replace('T', ' ');
+            var endDate = endDateOrigin.replace('T', ' ');
+
+            $.ajax({
+                url: 'employee/getWorkTime',
+                type: 'GET',
+                data: {
+                    id: id,
+                    from: startDate,
+                    to: endDate
+                },
+                success: function (data) {
+                    $("#workTime-" + id).text("Work time: " + data);
+                }
+            })
+        } else {
+
+            window.alert("All date boxes must be filled.\nSecond date box must contain bigger date value.");
+            $("#dateStartSelect").val("");
+            $("#dateFinishSelect").val("");
+
         }
-    })
+    } else {
+
+        window.alert("Incorrect date input.\nRequired: [mm/dd/yyyy hh:mm p]");
+        $("#dateStartSelect").val("");
+        $("#dateFinishSelect").val("");
+
+    }
 };
 
 function getExcursionsCount(elementId) {
@@ -91,7 +133,6 @@ function getExcursionsCount(elementId) {
             id: id
         },
         success: function (data) {
-            console.log(data);
             $("#excursionsCount-" + id).text("Excursions done: " + data);
         }
     })

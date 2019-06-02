@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 @Controller
@@ -21,8 +22,10 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public String employeeForm(Locale locale, Model model) {
+
         model.addAttribute("employees", employeeService.getAll());
         return "museum-website.employees";
+
     }
 
     @GetMapping("/employee/position")
@@ -32,16 +35,25 @@ public class EmployeeController {
         if(position.equalsIgnoreCase("all") || position.isEmpty()) {
 
             model.addAttribute("employees", employeeService.getAll());
+            return "employees";
 
         } else {
 
             Position pos = new Position();
             pos.setName(position);
-            model.addAttribute("employees", employeeService.getByPosition(pos));
+            try {
+
+                model.addAttribute("employees", employeeService.getByPosition(pos));
+                return "employees";
+
+            } catch (IllegalArgumentException e) {
+
+                model.addAttribute("description", e.getMessage());
+                return "error";
+
+            }
 
         }
-
-        return "employees";
 
     }
 
@@ -50,13 +62,25 @@ public class EmployeeController {
                                  @RequestParam(name = "to") String endDate, Model model
                                 ) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime from = LocalDateTime.parse(startDate, formatter);
-        LocalDateTime to = LocalDateTime.parse(endDate, formatter);
+        try {
 
-        model.addAttribute("employees", employeeService.getFreeGuides(from, to));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime from = LocalDateTime.parse(startDate, formatter);
+            LocalDateTime to = LocalDateTime.parse(endDate, formatter);
+            model.addAttribute("employees", employeeService.getFreeGuides(from, to));
+            return "employees";
 
-        return "employees";
+        } catch (DateTimeParseException e) {
+
+            model.addAttribute("description", "Error occurred while processing date and time.");
+            return "error";
+
+        } catch (IllegalArgumentException e) {
+
+            model.addAttribute("description", e.getMessage());
+            return "error";
+
+        }
 
     }
 
@@ -67,11 +91,23 @@ public class EmployeeController {
                               @RequestParam(name = "to") String endDate,
                               Model model) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime from = LocalDateTime.parse(startDate, formatter);
-        LocalDateTime to = LocalDateTime.parse(endDate, formatter);
+        try {
 
-        return Long.toString(employeeService.getWorkTime(id, from, to));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime from = LocalDateTime.parse(startDate, formatter);
+            LocalDateTime to = LocalDateTime.parse(endDate, formatter);
+
+            return Long.toString(employeeService.getWorkTime(id, from, to));
+
+        } catch (DateTimeParseException e) {
+
+            return "Error occurred while processing date and time.";
+
+        } catch (IllegalArgumentException e) {
+
+            return e.getMessage();
+
+        }
 
     }
 
@@ -81,7 +117,15 @@ public class EmployeeController {
                                      Model model
                                             ) {
 
-        return Long.toString(employeeService.getExcursionCount(id));
+        try {
+
+            return Long.toString(employeeService.getExcursionCount(id));
+
+        } catch (IllegalArgumentException e) {
+
+            return e.getMessage();
+
+        }
 
     }
 

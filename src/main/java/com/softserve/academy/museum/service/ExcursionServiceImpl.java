@@ -25,8 +25,18 @@ public class ExcursionServiceImpl implements ExcursionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Excursion> getAvailable(LocalDateTime from, LocalDateTime to) {
-        return excursionDao.getAvailable(from, to);
+    public List<Excursion> getAvailable(LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
+
+        if (from.isBefore(to)) {
+
+            return excursionDao.getAvailable(from, to);
+
+        } else {
+
+            throw new IllegalArgumentException("Second date value has to be bigger.");
+
+        }
+
     }
 
 

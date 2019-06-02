@@ -1,13 +1,11 @@
 package com.softserve.academy.museum.service;
 
 import com.softserve.academy.museum.dao.EmployeeDao;
-import com.softserve.academy.museum.dao.EmployeeDaoImpl;
 import com.softserve.academy.museum.model.Employee;
 import com.softserve.academy.museum.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,26 +20,75 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     @Transactional(readOnly = true)
     public ArrayList<Employee> getAll() {
+
         return employeeDao.getAll();
+
     }
 
     @Override
-    public List<Employee> getByPosition(Position position) {
-        return employeeDao.getByPosition(position);
+    public List<Employee> getByPosition(Position position) throws IllegalArgumentException {
+        List<Employee> empList = employeeDao.getByPosition(position);
+
+        if ((empList.isEmpty() && !position.getName().equalsIgnoreCase("MANAGER")
+                && !position.getName().equalsIgnoreCase("GUIDE")) || empList == null) {
+
+            throw new IllegalArgumentException("Not existing position.");
+
+        } else {
+
+            return empList;
+
+        }
+
     }
 
     @Override
-    public List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) {
-        return employeeDao.getFreeGuides(from, to);
+    public List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
+
+        if (from.isBefore(to)) {
+
+            return employeeDao.getFreeGuides(from, to);
+
+        } else {
+
+            throw new IllegalArgumentException("Second date value has to be bigger.");
+
+        }
     }
 
     @Override
-    public long getWorkTime(int id, LocalDateTime from, LocalDateTime to) {
-        return employeeDao.getWorkTime(id, from, to);
+    public long getWorkTime(int id, LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
+        if (id > 0) {
+
+            if (from.isBefore(to)) {
+
+                return employeeDao.getWorkTime(id, from, to);
+
+            } else {
+
+                throw new IllegalArgumentException("Second date value has to be bigger.");
+
+            }
+
+        } else {
+
+            throw new IllegalArgumentException("Id has to be more than 0");
+
+        }
     }
 
     @Override
-    public long getExcursionCount(int id) {
-        return employeeDao.getExcursionsCount(id);
+    public long getExcursionCount(int id) throws IllegalArgumentException {
+
+        if (id >0) {
+
+            return employeeDao.getExcursionsCount(id);
+
+        } else {
+
+            throw new IllegalArgumentException("Id has to be more than 0.");
+
+        }
+
     }
 }

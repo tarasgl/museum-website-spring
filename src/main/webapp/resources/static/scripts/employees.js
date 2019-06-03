@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    $(".extendedGuideInfo").hide();
+});
+
+
 function posChanged() {
 
     var pos = $("#posSelect option:selected").val();
@@ -13,6 +18,15 @@ function posChanged() {
         },
         complete: function (data) {
             $("#posSelect").val(pos);
+            if (pos == "Guide") {
+                $("#guideSearch").show();
+                $(".extendedGuideInfo").show();
+            } else if (pos == "") {
+                $("#guideSearch").hide();
+                $(".extendedGuideInfo").hide();
+            } else {
+                $("#guideSearch").hide();
+            }
         }
     })
 };
@@ -71,7 +85,7 @@ function clearDates() {
         url: 'employee/position',
         type: 'GET',
         data: {
-            position: "all"
+            position: "Guide7"
         },
         success: function (data) {
             $('#main-div').html(data);

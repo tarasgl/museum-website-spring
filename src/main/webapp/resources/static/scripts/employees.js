@@ -85,7 +85,7 @@ function clearDates() {
         url: 'employee/position',
         type: 'GET',
         data: {
-            position: "Guide7"
+            position: "Guide"
         },
         success: function (data) {
             $('#main-div').html(data);

@@ -1,9 +1,10 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
         <div class="col-md-1"></div>
-        <div class="col-md-11">
-            <label>Excursions count: <c:out value="${excursions.size()}"/></label>
+        <div class="col-md-10 row excursion-info">
+            <label>Excursions shown: <c:out value="${excursions.size()}"/></label>
         </div>
+        <div class="col-md-1"></div>
         <c:if test="${not empty excursions}">
             <c:forEach items="${excursions}" var="excursion">
                 <div class="col-md-1"></div>
@@ -24,5 +25,9 @@
         </c:if>
         <c:if test="${empty excursions}">
             <div class="col-md-1"></div>
-            <h2>We're sorry, but no excursions found:(</h2>
+            <div class = "col-md-10 row excursions-not-found">
+                <h2>We're sorry, but no excursions found:(</h2>
+            </div>
+            <div class="col-md-1"></div>
+
         </c:if>

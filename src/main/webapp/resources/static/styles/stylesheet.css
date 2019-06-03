@@ -1,7 +1,9 @@
 .excursion-info {
+    min-height: 0;
     background-color: azure;
     border-radius: 5px;
-    border: aqua 1px;
+    border:  1px;
+    border-color: chocolate;
     margin-top: 1.5rem;
 }
 
@@ -10,7 +12,40 @@
 
 }
 
+.filter-bar {
+    background: azure;
+    padding: 0.5rem;
+    margin-left: 0;
+}
+
+.exhibits-filter-bar{
+    margin-bottom: 2rem;
+}
+
 .footer {
     margin-top: 1.5rem;
     padding-top: 1rem;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("/resources/static/img/background-museum.jpg");
+
+    /* Full height */
+    /*height: 100%;*/
+
+
+    padding:0;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.main-container{
+}
+
+.excursions-not-found{
+    height:450px;
 }

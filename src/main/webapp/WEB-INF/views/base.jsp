@@ -20,15 +20,17 @@
 </head>
 <body>
 
+<div class="bg container-fluid">
     <tiles:insertAttribute name="header" />
     <tiles:insertAttribute name="filterBar"/>
 
-    <div id="main-div" class="row">
+    <div id="main-div" class="row container-fluid main-container">
         <tiles:insertAttribute name="content" />
     </div>
 
     <tiles:insertAttribute name="footer" />
 
+</div>
 </body>
 
 <script src='${pageContext.request.contextPath}<tiles:getAsString name="script"/>'></script>

@@ -1,4 +1,4 @@
-<div id="filters" class="row">
+<div id="filters" class="row container-fluid filter-bar">
 
     <div class="col-md-1"></div>
     <label>From</label>

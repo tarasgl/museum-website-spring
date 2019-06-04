@@ -3,6 +3,15 @@ package com.softserve.academy.museum.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ *
+ * Pojo class for 'position' database entity.
+ *
+ * @author Andrii Vashchenok
+ * @version 1.0
+ * @since 04.06.2019
+ *
+ */
 @Entity
 @Table(name="position")
 public class Position {
@@ -15,18 +24,38 @@ public class Position {
     @Column(name = "name")
     private String name;
 
+    /**
+     * Gets 'id' of the position.
+     *
+     * @return 'Id' of the position.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets 'id' of the position.
+     *
+     * @param id 'Id' of the position.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets name of the position.
+     *
+     * @return Name of the position.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name of the position.
+     *
+     * @param name Name of the position.
+     */
     public void setName(String name) {
         this.name = name;
     }

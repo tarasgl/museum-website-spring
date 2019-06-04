@@ -1,14 +1,25 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409 group of Softserve Academy. (Andrii Vashchenok and Taras Hlukhovetskiy)
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
 package com.softserve.academy.museum.model;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * Pojo class for 'employee' entity from database.
+ *
+ * Pojo class for 'employee' database entity.
  *
  * @author Andrii Vashchenok
+ * @version 1.0
+ * @since 04.06.2019
+ *
  */
-
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -104,6 +115,24 @@ public class Employee {
         this.position = position;
     }
 
+    /**
+     * Gets the image path for the employee.
+     *
+     * @return Path for image.
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * Sets the image path for the employee.
+     *
+     * @param image Path for image.
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(firstname, lastname, position);
@@ -122,14 +151,6 @@ public class Employee {
         return (employee.firstname.equals(firstname))
                 && (employee.lastname.equals(lastname))
                 && (employee.position.equals(position));
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
 }

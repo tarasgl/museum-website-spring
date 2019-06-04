@@ -14,6 +14,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+
     @Override
     @Transactional
     public List<Author> getAll() {

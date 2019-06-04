@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    ArrayList<Employee> getAll();
+    List<Employee> getAll();
 
     List<Employee> getByPosition(Position position);
 

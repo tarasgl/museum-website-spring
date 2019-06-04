@@ -12,20 +12,24 @@
                     <h3><c:out value="${employee.firstname}"/>
                         <c:out value="${employee.lastname}"/></h3>
                     <p><c:out value="${employee.position}"/></p>
+
                     <c:if test = "${employee.position.toString().equalsIgnoreCase('GUIDE')}">
-                        <label style="margin-left: 30px">From</label>
-                        <input id="dateStartSelect-${employee.id}" type="datetime-local" name="dateSelect" style="margin-left: 20px"
-                               min="2000-06-07T00:00" max="2060-06-14T00:00" required>
-                        <label style="margin-left: 30px">To</label>
-                        <input id="dateFinishSelect-${employee.id}" type="datetime-local" name="dateSelect" style="margin-left: 20px"
-                               min="2000-06-07T00:00" max="2060-06-14T00:00" required>
-                        <button id="workTimeSearchButton-${employee.id}" onclick="getWorkTime(this.id)">Get work time</button>
-                        <br>
-                        <label id="workTime-${employee.id}">Work time: ---</label>
-                        <br>
-                        <label id="excursionsCount-${employee.id}">Excursions done: ---</label>
-                        <button id="excursionsCountButton-${employee.id}" onclick="getExcursionsCount(this.id)">Get count of excursions</button>
+                        <div class="extendedGuideInfo">
+                            <label>From</label>
+                            <input id="dateStartSelect-${employee.id}" type="datetime-local" name="dateSelect" style="margin-left: 20px"
+                                   min="2000-06-07T00:00" max="2060-06-14T00:00" required>
+                            <label style="margin-left: 30px">To</label>
+                            <input id="dateFinishSelect-${employee.id}" type="datetime-local" name="dateSelect" style="margin-left: 20px"
+                                   min="2000-06-07T00:00" max="2060-06-14T00:00" required>
+                            <br>
+                            <label id="workTime-${employee.id}">Work time: ---</label>
+                            <button id="workTimeSearchButton-${employee.id}" style="float: right" onclick="getWorkTime(this.id)">Get work time</button>
+                            <br>
+                            <label id="excursionsCount-${employee.id}">Excursions done: ---</label>
+                            <button id="excursionsCountButton-${employee.id}" style="float: right" onclick="getExcursionsCount(this.id)">Get count of excursions</button>
+                        </div>
                     </c:if>
+
                 </div>
             </div>
             <div class="col-md-1"></div>

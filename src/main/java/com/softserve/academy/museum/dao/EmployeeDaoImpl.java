@@ -1,3 +1,11 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409 group of Softserve Academy. (Andrii Vashchenok and Taras Hlukhovetskiy)
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
 package com.softserve.academy.museum.dao;
 
 import com.softserve.academy.museum.model.Employee;
@@ -6,20 +14,32 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * DAO implementation for Employee entity.
+ *
+ * @author Andrii Vashchenok
+ * @version 1.0
+ * @since 04.06.2019
+ *
+ */
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-
+    /**
+     * Gets all employees.
+     *
+     * @return List of all employees.
+     */
     @Override
     @Transactional
     public List<Employee> getAll() {
@@ -30,6 +50,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     }
 
+    /**
+     * Gets the list of employees by adjusted position.
+     *
+     * @param position Position the list of employees to be looked by.
+     * @return The list of employees by position.
+     */
     @Override
     @Transactional
     public List<Employee> getByPosition(Position position) {
@@ -43,6 +69,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     }
 
+    /**
+     * Gets the list of available (free) employees with 'Guide' position
+     * by given date-time period (from - to).
+     *
+     * @param from Start period date-time value.
+     * @param to Finish period date-time value.
+     * @return The list of free guides.
+     */
     @Override
     @Transactional
     public List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) {
@@ -59,6 +93,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     }
 
+    /**
+     * Gets the work time (long value standing for minutes) for given 'id' (guide found by given 'id') or 0 if
+     * no guide was found. Work time is calculated for given date-time period.
+     *
+     * @param id 'Id' of guide to be work time calculated for.
+     * @param from Start period date-time value.
+     * @param to Finish period date-time value.
+     * @return Minutes of work for given period.
+     */
     @Override
     @Transactional
     public long getWorkTime(int id, LocalDateTime from, LocalDateTime to) {
@@ -80,6 +123,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     }
 
+    /**
+     * Gets the number of done excursions for given 'id' (guide found by given 'id') or
+     * 0 if no guide was found. Done excursions are counted from the very beginning till current date-time.
+     *
+     * @param id 'Id' of guide the number of excursions to be calculated for.
+     * @return The number of excursions done.
+     */
     @Override
     @Transactional
     public long getExcursionsCount(int id) {

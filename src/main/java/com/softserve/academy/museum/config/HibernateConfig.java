@@ -17,6 +17,15 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ *
+ * Class for setting Hibernate configuration.
+ *
+ * @author Andrii Vashchenok, Taras Hlukhovetskiy
+ * @version 1.0
+ * @since 04.06.2019
+ *
+ */
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
@@ -24,6 +33,11 @@ public class HibernateConfig {
     @Autowired
     private ApplicationContext context;
 
+    /**
+     * Gets session factory bean.
+     *
+     * @return Session factory bean.
+     */
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -32,6 +46,11 @@ public class HibernateConfig {
         return factoryBean;
     }
 
+    /**
+     * Gets transaction manager.
+     *
+     * @return Transaction manager.
+     */
     @Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();

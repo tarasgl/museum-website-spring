@@ -30,7 +30,10 @@ public class EmployeeServiceImplTest {
     @Mock
     private EmployeeDao employeeDao = new EmployeeDaoImpl();
 
+    // Default values for tests
     private static int DEFAULT_NUMBER_OF_EMPLOYEES = 5;
+    private static LocalDateTime DEFAULT_FROM_DATE_TIME = LocalDateTime.parse("1999-12-12T10:22:00");
+    private static LocalDateTime DEFAULT_TO_DATE_TIME = LocalDateTime.parse("2019-12-12T10:22:00");
 
     @After
     public void finalize() {
@@ -44,7 +47,7 @@ public class EmployeeServiceImplTest {
 
         when(employeeDao.getAll()).thenReturn(employeeList);
 
-        Assert.assertEquals(employeeService.getAll(), employeeList);
+        Assert.assertEquals(employeeService.getAll(), createList(DEFAULT_NUMBER_OF_EMPLOYEES));
         int listIndex = 1;
         Assert.assertEquals(employeeService.getAll().get(listIndex).getFirstname(), "Name" + (listIndex+1));
     }
@@ -80,14 +83,14 @@ public class EmployeeServiceImplTest {
         managerList.add(employeeList.get(odd));
         when(employeeDao.getByPosition(managerPosition)).thenReturn(managerList);
 
-        Assert.assertEquals(employeeService.getByPosition(guidePosition).get(0).getPosition().getName(), guidePosition.getName());
+        Assert.assertEquals(employeeService.getByPosition(guidePosition).get(0).getPosition().getName(), "Guide");
 
-        Assert.assertEquals(employeeService.getByPosition(managerPosition).get(0).getPosition().getName(), managerPosition.getName());
+        Assert.assertEquals(employeeService.getByPosition(managerPosition).get(0).getPosition().getName(), "Manager");
 
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void getByPositionExceptionTest() {
+    public void getByPositionIncorrectNameExceptionTest() {
         Position notExistingPosition = new Position();
         notExistingPosition.setName("Some random name");
         notExistingPosition.setId(1);
@@ -96,23 +99,56 @@ public class EmployeeServiceImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void getByPositionNullPositionExceptionTest() {
+        employeeService.getByPosition(null);
+    }
+
+    @Test
+    public void getFreeGuidesTest() {
+
+        when(employeeDao.getFreeGuides(DEFAULT_FROM_DATE_TIME, DEFAULT_TO_DATE_TIME))
+                .thenReturn(createList(DEFAULT_NUMBER_OF_EMPLOYEES));
+
+        Assert.assertEquals(employeeService.getFreeGuides(DEFAULT_FROM_DATE_TIME, DEFAULT_TO_DATE_TIME),
+                createList(DEFAULT_NUMBER_OF_EMPLOYEES));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void getFreeGuidesDateNullExceptionTest() {
-        employeeService.getWorkTime(1, null, LocalDateTime.parse("1212-12-12T11:11:00"));
+        employeeService.getFreeGuides(null, DEFAULT_TO_DATE_TIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void getFreeGuidesIncorrectDateValuesExceptionTest() {
-        employeeService.getWorkTime(1, LocalDateTime.parse("2019-12-12T10:22:00"), LocalDateTime.parse("1999-12-12T10:22:00"));
+        employeeService.getFreeGuides(DEFAULT_TO_DATE_TIME, DEFAULT_FROM_DATE_TIME);
+    }
+
+    @Test
+    public void getWorkTimeTest() {
+        int expectedWorkTime = 190;
+        long expectedLong = expectedWorkTime;
+        int id = 1;
+        when(employeeDao.getWorkTime(id, DEFAULT_FROM_DATE_TIME, DEFAULT_TO_DATE_TIME)).thenReturn(expectedLong);
+
+        Assert.assertEquals(employeeService.getWorkTime(id, DEFAULT_FROM_DATE_TIME, DEFAULT_TO_DATE_TIME), expectedWorkTime);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void getWorkTimeIncorrectDateValuesExceptionTest() {
-        employeeService.getWorkTime(1, LocalDateTime.parse("2019-12-12T10:22:00"), LocalDateTime.parse("1999-12-12T10:22:00"));
+        employeeService.getWorkTime(1, DEFAULT_TO_DATE_TIME, DEFAULT_FROM_DATE_TIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void getWorkTimeNullDateExceptionTest() {
-        employeeService.getWorkTime(1, null, LocalDateTime.parse("1999-12-12T10:22:00"));
+        employeeService.getWorkTime(1, null, DEFAULT_FROM_DATE_TIME);
+    }
+
+    @Test
+    public void getExcursionCountTest() {
+        long arg = DEFAULT_NUMBER_OF_EMPLOYEES;
+        when(employeeDao.getExcursionsCount(1)).thenReturn(arg);
+
+        Assert.assertEquals(employeeService.getExcursionCount(1), DEFAULT_NUMBER_OF_EMPLOYEES);
     }
 
     private List<Employee> createList(int count) {

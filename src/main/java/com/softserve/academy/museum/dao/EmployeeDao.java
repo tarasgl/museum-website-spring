@@ -4,7 +4,6 @@ import com.softserve.academy.museum.model.Employee;
 import com.softserve.academy.museum.model.Position;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface EmployeeDao {

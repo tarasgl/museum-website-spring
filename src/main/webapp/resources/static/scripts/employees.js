@@ -119,7 +119,7 @@ function getWorkTime(elementId) {
                     to: endDate
                 },
                 success: function (data) {
-                    $("#workTime-" + id).text("Work time: " + data);
+                    $("#workTime-" + id).text("Work time: " + data + " mins");
                 }
             })
         } else {

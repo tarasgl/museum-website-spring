@@ -22,7 +22,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     @Transactional
-    public ArrayList<Employee> getAll() {
+    public List<Employee> getAll() {
 
         TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery("from Employee");
         ArrayList<Employee> list = (ArrayList<Employee>) query.getResultList();

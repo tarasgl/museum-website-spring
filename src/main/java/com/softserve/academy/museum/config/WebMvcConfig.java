@@ -40,13 +40,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return tilesConfigurer;
     }
 
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasename("messages");
-        return source;
-    }
-
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         TilesViewResolver viewResolver = new TilesViewResolver();
@@ -60,11 +53,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources/");
     }
 
-
-    @Override
-    public Validator getValidator() {
-        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource());
-        return validator;
-    }
 }

@@ -58,37 +58,23 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public long getWorkTime(int id, LocalDateTime from, LocalDateTime to) throws IllegalArgumentException {
-        if (id > 0) {
 
-            if (from.isBefore(to)) {
+        if (from.isBefore(to)) {
 
-                return employeeDao.getWorkTime(id, from, to);
-
-            } else {
-
-                throw new IllegalArgumentException("Second date value has to be bigger.");
-
-            }
+            return employeeDao.getWorkTime(id, from, to);
 
         } else {
 
-            throw new IllegalArgumentException("Id has to be more than 0");
+            throw new IllegalArgumentException("Second date value has to be bigger.");
 
         }
+
     }
 
     @Override
     public long getExcursionCount(int id) throws IllegalArgumentException {
 
-        if (id >0) {
-
-            return employeeDao.getExcursionsCount(id);
-
-        } else {
-
-            throw new IllegalArgumentException("Id has to be more than 0.");
-
-        }
+        return employeeDao.getExcursionsCount(id);
 
     }
 }

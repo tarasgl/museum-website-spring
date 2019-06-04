@@ -47,8 +47,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Transactional
     public List<Employee> getFreeGuides(LocalDateTime from, LocalDateTime to) {
 
-        String hql = "select distinct e.employee from Excursion e "
-                + "where e.start not between :fromDate and :toDate";
+        String hql = "select em from Employee em where em.position.name = 'Guide' and em.id not in (" +
+                "select distinct ex.employee.id from Excursion ex where ex.start between :fromDate and :toDate)";
 
         TypedQuery<Employee> query = sessionFactory.getCurrentSession().createQuery(hql);
 

@@ -43,14 +43,24 @@ public class ExhibitController {
      */
     @GetMapping("/exhibits")
     public String exhibits(Model model){
-        model.addAttribute("exhibits", exhibitService.getAll());
-        model.addAttribute("authors", authorService.getAll());
-        model.addAttribute("halls", hallService.getAll());
-        model.addAttribute("techniques", techniqueService.getAll());
-        model.addAttribute("materials", materialService.gatAll());
-        Position managerPosition = new Position();
-        managerPosition.setName("manager");
-        model.addAttribute("employees", employeeService.getByPosition(managerPosition));
+        try {
+            model.addAttribute("exhibits", exhibitService.getAll());
+            model.addAttribute("authors", authorService.getAll());
+            model.addAttribute("halls", hallService.getAll());
+            model.addAttribute("techniques", techniqueService.getAll());
+            model.addAttribute("materials", materialService.gatAll());
+            Position managerPosition = new Position();
+            managerPosition.setName("manager");
+            model.addAttribute("employees", employeeService.getByPosition(managerPosition));
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+            model.addAttribute("description", "Failed to load exhibit page" + ex.getMessage());
+            return "error";
+        } catch (Exception ex){
+            ex.printStackTrace();
+            model.addAttribute("description", ex.getMessage());
+            return "error";
+        }
         return "museum-website.exhibits";
     }
 
@@ -66,13 +76,25 @@ public class ExhibitController {
      */
     @GetMapping("/exhibits/filterByAuthor")
     public String exhibitsByAuthor(@RequestParam(name="authorId") Integer id, Model model){
-        if (id == null){
-            model.addAttribute("exhibits", exhibitService.getAll());
-        } else {
-            model.addAttribute("exhibits", exhibitService.getByAuthorId(id));
-        }
+        try {
+            if (id == null) {
+                model.addAttribute("exhibits", exhibitService.getAll());
+            } else {
+                model.addAttribute("exhibits", exhibitService.getByAuthorId(id));
+            }
+        } catch (IllegalArgumentException ex) {
+        ex.printStackTrace();
+        model.addAttribute("description", "Failed to load exhibits" + ex.getMessage());
+        return "exhibit-error";
+    } catch (Exception ex){
+        ex.printStackTrace();
+        model.addAttribute("description", ex.getMessage());
+        return "exhibit-error";
+    }
         return "exhibits";
     }
+
+
     /**
      * Handles get request for exhibits filtered by hall
      * sets exhibits attribute with list of exhibits and forwards request
@@ -84,10 +106,20 @@ public class ExhibitController {
      */
     @GetMapping("/exhibits/filterByHall")
     public String exhibitsByHall(@RequestParam(name="hallId") Integer id, Model model){
-        if (id == null){
-            model.addAttribute("exhibits", exhibitService.getAll());
-        } else {
-            model.addAttribute("exhibits", exhibitService.getByHallId(id));
+        try {
+            if (id == null){
+                model.addAttribute("exhibits", exhibitService.getAll());
+            } else {
+                model.addAttribute("exhibits", exhibitService.getByHallId(id));
+            }
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+            model.addAttribute("description", "Failed to load exhibits" + ex.getMessage());
+            return "exhibit-error";
+        } catch (Exception ex){
+            ex.printStackTrace();
+            model.addAttribute("description", ex.getMessage());
+            return "exhibit-error";
         }
         return "exhibits";
     }
@@ -102,10 +134,20 @@ public class ExhibitController {
      */
     @GetMapping("/exhibits/filterByMaterial")
     public String exhibitsByMaterial(@RequestParam(name="material") String material, Model model){
-        if (material == null || material.isEmpty()){
-            model.addAttribute("exhibits", exhibitService.getAll());
-        } else {
-            model.addAttribute("exhibits", exhibitService.getByMaterial(material));
+        try {
+            if (material == null || material.isEmpty()){
+                model.addAttribute("exhibits", exhibitService.getAll());
+            } else {
+                model.addAttribute("exhibits", exhibitService.getByMaterial(material));
+            }
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+            model.addAttribute("description", "Failed to load exhibits" + ex.getMessage());
+            return "exhibit-error";
+        } catch (Exception ex){
+            ex.printStackTrace();
+            model.addAttribute("description", ex.getMessage());
+            return "exhibit-error";
         }
         return "exhibits";
     }
@@ -120,10 +162,20 @@ public class ExhibitController {
      */
     @GetMapping("/exhibits/filterByTechnique")
     public String exhibitsByTechnique(@RequestParam(name="technique") String technique, Model model){
-        if (technique == null || technique.isEmpty()){
-            model.addAttribute("exhibits", exhibitService.getAll());
-        } else {
-            model.addAttribute("exhibits", exhibitService.getByTechnique(technique));
+        try {
+            if (technique == null || technique.isEmpty()) {
+                model.addAttribute("exhibits", exhibitService.getAll());
+            } else {
+                model.addAttribute("exhibits", exhibitService.getByTechnique(technique));
+            }
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+            model.addAttribute("description", "Failed to load exhibits" + ex.getMessage());
+            return "exhibit-error";
+        } catch (Exception ex){
+            ex.printStackTrace();
+            model.addAttribute("description", ex.getMessage());
+            return "exhibit-error";
         }
         return "exhibits";
     }
@@ -139,10 +191,20 @@ public class ExhibitController {
      */
     @GetMapping("/exhibits/filterByEmployee")
     public String exhibitsByEmployeeId(@RequestParam(name="employeeId") Integer employeeId, Model model){
-        if (employeeId == null){
-            model.addAttribute("exhibits", exhibitService.getAll());
-        } else {
-            model.addAttribute("exhibits", exhibitService.getByEmployeeId(employeeId));
+        try {
+            if (employeeId == null){
+                model.addAttribute("exhibits", exhibitService.getAll());
+            } else {
+                model.addAttribute("exhibits", exhibitService.getByEmployeeId(employeeId));
+            }
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+            model.addAttribute("description", "Failed to load exhibits" + ex.getMessage());
+            return "exhibit-error";
+        } catch (Exception ex){
+            ex.printStackTrace();
+            model.addAttribute("description", ex.getMessage());
+            return "exhibit-error";
         }
         return "exhibits";
     }

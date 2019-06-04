@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
  *
@@ -37,12 +36,11 @@ public class ExcursionController {
     /**
      * Handles request to get all excursions.
      *
-     * @param locale Unused parameter for now.
      * @param model Redirect model.
      * @return Path for tiled page to continues processing the request and to be send as response.
      */
     @GetMapping("/excursion")
-    public String getExcursion(Locale locale, Model model) {
+    public String getExcursion(Model model) {
         model.addAttribute("excursions", excursionService.getAll());
         return "museum-website.excursions";
     }

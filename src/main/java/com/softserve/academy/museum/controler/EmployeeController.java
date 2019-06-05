@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
  *
@@ -39,12 +38,11 @@ public class EmployeeController {
     /**
      * Handles request to get all employees.
      *
-     * @param locale Unused parameter for now.
      * @param model Redirect model.
      * @return Path for tiled page to continues processing the request and to be send as response.
      */
     @GetMapping("/employee")
-    public String employeeForm(Locale locale, Model model) {
+    public String employeeForm(Model model) {
 
         model.addAttribute("employees", employeeService.getAll());
         return "museum-website.employees";
@@ -131,15 +129,13 @@ public class EmployeeController {
      * @param id Employee 'id'.
      * @param startDate Start period date-time value in "yyyy-MM-dd HH:mm" format.
      * @param endDate Finish period date-time value in "yyyy-MM-dd HH:mm" format.
-     * @param model Unused parameter for now.
      * @return Work time in minutes.
      */
     @GetMapping("/employee/getWorkTime")
     @ResponseBody
     public String getWorkTime(@RequestParam(name = "id") Integer id,
                               @RequestParam(name = "from") String startDate,
-                              @RequestParam(name = "to") String endDate,
-                              Model model) {
+                              @RequestParam(name = "to") String endDate) {
 
         try {
 
@@ -166,14 +162,11 @@ public class EmployeeController {
      * (employee with 'Guide' position with given 'id') or error if input is invalid.
      *
      * @param id Employee 'id'.
-     * @param model Unused parameter for now.
      * @return The number of done excursions.
      */
     @GetMapping("/employee/getExcursionsCount")
     @ResponseBody
-    public String getExcursionsCount(@RequestParam(name = "id") Integer id,
-                                     Model model
-                                            ) {
+    public String getExcursionsCount(@RequestParam(name = "id") Integer id) {
 
         try {
 
